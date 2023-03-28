@@ -1,4 +1,4 @@
-
+// QUESTÃO 1
 public class Impressora {
 
     private String fabricante;

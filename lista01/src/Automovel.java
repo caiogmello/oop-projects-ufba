@@ -1,3 +1,4 @@
+// QUESTÃO 2
 enum TipoCombustivel {
     GASOLINA, ALCOOL, FLEX;
 }

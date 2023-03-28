@@ -1,7 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        Automovel automovel = new Automovel(TipoCombustivel.FLEX, "Ford", 2010, "Mustang");
+        Aluno aluno = new Aluno("Caio", 2021, "Ciência da computação", 5);
 
-        System.out.println(automovel.getQuantidadeDeCombustivel(30));
+        System.out.println(aluno.getNumeroDeCreditos());
     }
 }
