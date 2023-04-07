@@ -1,11 +1,4 @@
-/*
-Classes:
-    - Locacao;
-    - Imovel;
-    - Cliente;
-    - Aplicativo;
-    - Proprietario;
- */
+
 
 
 

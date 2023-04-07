@@ -1,3 +1,6 @@
+enum Tipo {
+    CASA, APTO;
+}
 public class Imovel {
 
     private String numeroIptu;
@@ -6,13 +9,13 @@ public class Imovel {
     private String cep;
     private String estado;
     private String cidade;
-    private String tipo;
+    private Tipo tipo;
     private String utilizacao;
 
     public Imovel(String numeroIptu, String rua,
                   String numero, String cep,
                   String estado, String cidade,
-                  String tipo, String utilizacao) {
+                  Tipo tipo, String utilizacao) {
         this.numeroIptu = numeroIptu;
         this.rua = rua;
         this.numero = numero;
@@ -21,6 +24,10 @@ public class Imovel {
         this.cidade = cidade;
         this.tipo = tipo;
         this.utilizacao = utilizacao;
+    }
+
+    public Imovel(String numeroIptu, String rua, String numero, String cep, Tipo tipo, String utilizacao) {
+        this(numeroIptu, rua, numero, cep, "Bahia", "Salvador", tipo, utilizacao);
     }
 
     public String getNumeroIptu() {
@@ -71,11 +78,11 @@ public class Imovel {
         this.cidade = cidade;
     }
 
-    public String getTipo() {
+    public Tipo getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo) {
+    public void setTipo(Tipo tipo) {
         this.tipo = tipo;
     }
 

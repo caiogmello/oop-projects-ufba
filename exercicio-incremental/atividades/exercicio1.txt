@@ -1,0 +1,7 @@
+1. Classes que consigo identificar:
+    - Locacao;
+    - Imovel;
+    - Cliente;
+    - Aplicativo;
+    - Proprietario;
+2. Imovel e Proprietario implementadas em /src.

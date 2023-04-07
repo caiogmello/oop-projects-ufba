@@ -23,6 +23,20 @@ public class Proprietario {
         this.cidade = cidade;
     }
 
+    public void atualizaEndereco(String rua, String numero, String cep, String estado, String cidade){
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+        this.estado = estado;
+        this.cidade = cidade;
+    }
+
+    public void atualizaEndereco(String rua, String numero, String cep) {
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -86,4 +100,5 @@ public class Proprietario {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+
 }
