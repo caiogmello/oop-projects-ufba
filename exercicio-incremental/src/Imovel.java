@@ -1,5 +1,7 @@
+import java.util.Objects;
+
 enum Tipo {
-    CASA, APTO
+    CASA, APTO, INVALID
 }
 public class Imovel {
 
@@ -11,20 +13,31 @@ public class Imovel {
     public Imovel(String numeroIptu, String rua,
                   String numero, String cep,
                   String estado, String cidade,
-                  Tipo tipo, String utilizacao) {
+                  String tipo, String utilizacao) {
         this.numeroIptu = numeroIptu;
         this.endereco = new Endereco(rua, numero, cep, estado, cidade);
-        this.tipo = tipo;
+        this.tipo = verificaTipo(tipo)
+                ? Tipo.valueOf(tipo.toUpperCase())
+                : Tipo.INVALID;
         this.utilizacao = utilizacao;
     }
 
     public Imovel(String numeroIptu, String rua,
                   String numero, String cep,
-                  Tipo tipo, String utilizacao) {
+                  String tipo, String utilizacao) {
 
         this(numeroIptu, rua, numero,
-                cep, "Bahia", "Salvador",
+                cep, "BA", "Salvador",
                 tipo, utilizacao);
+    }
+
+    public boolean verificaTipo(String tipo) {
+        try {
+            Tipo.valueOf(tipo.toUpperCase());
+            return true;
+        } catch (IllegalArgumentException ex) {
+            return false;
+        }
     }
 
     public String getNumeroIptu() {
@@ -47,8 +60,10 @@ public class Imovel {
         return tipo;
     }
 
-    public void setTipo(Tipo tipo) {
-        this.tipo = tipo;
+    public void setTipo(String tipo) {
+        this.tipo = verificaTipo(tipo)
+                ? Tipo.valueOf(tipo.toUpperCase())
+                : Tipo.INVALID;
     }
 
     public String getUtilizacao() {
@@ -57,6 +72,29 @@ public class Imovel {
 
     public void setUtilizacao(String utilizacao) {
         this.utilizacao = utilizacao;
+    }
+
+    @Override
+    public String toString() {
+        return "Imovel{" +
+                "numeroIptu='" + numeroIptu + '\'' +
+                ", endereco=" + endereco +
+                ", tipo=" + tipo +
+                ", utilizacao='" + utilizacao + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Imovel imovel = (Imovel) o;
+        return Objects.equals(numeroIptu, imovel.numeroIptu) && Objects.equals(endereco, imovel.endereco) && tipo == imovel.tipo && Objects.equals(utilizacao, imovel.utilizacao);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numeroIptu, endereco, tipo, utilizacao);
     }
 }
 

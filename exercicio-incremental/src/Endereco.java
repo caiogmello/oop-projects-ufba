@@ -1,4 +1,4 @@
-enum Estados {
+enum Estado {
     AC, AL, AP, AM, BA, CE, DF, ES, GO, MA,
     MT, MS, MG, PA, PB, PR, PE, PI, RJ, RN,
     RS, RO, RR, SC, SP, SE, TO, INVALID
@@ -8,7 +8,7 @@ public class Endereco {
     private String rua;
     private String numero;
     private String cep;
-    private Estados estado;
+    private Estado estado;
     private String cidade;
 
     public Endereco(String rua
@@ -18,17 +18,17 @@ public class Endereco {
             , String cidade) {
 
         this.estado = verificaEstado(estado)
-                ? Estados.valueOf(estado.toUpperCase())
-                : Estados.INVALID;
+                ? Estado.valueOf(estado.toUpperCase())
+                : Estado.INVALID;
         this.rua = rua;
         this.numero = numero;
         this.cep = cep;
         this.cidade = cidade;
     }
 
-    public boolean verificaEstado(String estado) {
+    private boolean verificaEstado(String estado) {
         try {
-            Estados.valueOf(estado.toUpperCase());
+            Estado.valueOf(estado.toUpperCase());
             return true;
         } catch (IllegalArgumentException ex) {
             return false;
@@ -65,8 +65,8 @@ public class Endereco {
 
     public void setEstado(String estado) {
         this.estado = verificaEstado(estado)
-                ? Estados.valueOf(estado.toUpperCase())
-                : Estados.INVALID;
+                ? Estado.valueOf(estado.toUpperCase())
+                : Estado.INVALID;
     }
 
     public String getCidade() {

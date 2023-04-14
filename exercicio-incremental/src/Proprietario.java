@@ -1,9 +1,12 @@
+import java.util.ArrayList;
+
 public class Proprietario {
 
     private String nome;
     private String cpf;
     private String identidade;
     private Endereco endereco;
+    private ArrayList<Imovel> imoveis = new ArrayList<>();
 
     public Proprietario(String nome, String cpf,
                         String identidade, String rua,
@@ -15,6 +18,30 @@ public class Proprietario {
         this.endereco = new Endereco(rua, numero, cep, estado, cidade);
     }
 
+    public void addImovel(Imovel imovel) {
+        if(!possuiImovel(imovel)){
+            imoveis.add(imovel);
+        }
+    }
+
+    private boolean possuiImovel(Imovel imovel) {
+        for(Imovel i : imoveis) {
+            if(imovel.equals(i)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void listaImoveis(String tipo) {
+        for(Imovel i : imoveis) {
+            if(i.verificaTipo(tipo)){
+                if(i.getTipo().equals(Tipo.valueOf(tipo.toUpperCase()))) {
+                    System.out.println(i);
+                }
+            }
+        }
+    }
     public void atualizaEndereco(String rua, String numero,
                                  String cep, String estado,
                                  String cidade){
