@@ -3,11 +3,7 @@ public class Proprietario {
     private String nome;
     private String cpf;
     private String identidade;
-    private String rua;
-    private String numero;
-    private String cep;
-    private String estado;
-    private String cidade;
+    private Endereco endereco;
 
     public Proprietario(String nome, String cpf,
                         String identidade, String rua,
@@ -16,25 +12,23 @@ public class Proprietario {
         this.nome = nome;
         this.cpf = cpf;
         this.identidade = identidade;
-        this.rua = rua;
-        this.numero = numero;
-        this.cep = cep;
-        this.estado = estado;
-        this.cidade = cidade;
+        this.endereco = new Endereco(rua, numero, cep, estado, cidade);
     }
 
-    public void atualizaEndereco(String rua, String numero, String cep, String estado, String cidade){
-        this.rua = rua;
-        this.numero = numero;
-        this.cep = cep;
-        this.estado = estado;
-        this.cidade = cidade;
+    public void atualizaEndereco(String rua, String numero,
+                                 String cep, String estado,
+                                 String cidade){
+        this.endereco.setRua(rua);
+        this.endereco.setNumero(numero);
+        this.endereco.setCep(cep);
+        this.endereco.setEstado(estado);
+        this.endereco.setCidade(cidade);
     }
 
     public void atualizaEndereco(String rua, String numero, String cep) {
-        this.rua = rua;
-        this.numero = numero;
-        this.cep = cep;
+        this.endereco.setRua(rua);
+        this.endereco.setNumero(numero);
+        this.endereco.setCep(cep);
     }
 
     public String getNome() {
@@ -61,44 +55,11 @@ public class Proprietario {
         this.identidade = identidade;
     }
 
-    public String getRua() {
-        return rua;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-
 }

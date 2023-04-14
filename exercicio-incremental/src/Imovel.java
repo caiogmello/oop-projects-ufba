@@ -1,14 +1,10 @@
 enum Tipo {
-    CASA, APTO;
+    CASA, APTO
 }
 public class Imovel {
 
     private String numeroIptu;
-    private String rua;
-    private String numero;
-    private String cep;
-    private String estado;
-    private String cidade;
+    private Endereco endereco;
     private Tipo tipo;
     private String utilizacao;
 
@@ -17,17 +13,18 @@ public class Imovel {
                   String estado, String cidade,
                   Tipo tipo, String utilizacao) {
         this.numeroIptu = numeroIptu;
-        this.rua = rua;
-        this.numero = numero;
-        this.cep = cep;
-        this.estado = estado;
-        this.cidade = cidade;
+        this.endereco = new Endereco(rua, numero, cep, estado, cidade);
         this.tipo = tipo;
         this.utilizacao = utilizacao;
     }
 
-    public Imovel(String numeroIptu, String rua, String numero, String cep, Tipo tipo, String utilizacao) {
-        this(numeroIptu, rua, numero, cep, "Bahia", "Salvador", tipo, utilizacao);
+    public Imovel(String numeroIptu, String rua,
+                  String numero, String cep,
+                  Tipo tipo, String utilizacao) {
+
+        this(numeroIptu, rua, numero,
+                cep, "Bahia", "Salvador",
+                tipo, utilizacao);
     }
 
     public String getNumeroIptu() {
@@ -38,44 +35,12 @@ public class Imovel {
         this.numeroIptu = numeroIptu;
     }
 
-    public String getRua() {
-        return rua;
+    public Endereco getEndereco() {
+        return endereco;
     }
 
-    public void setRua(String rua) {
-        this.rua = rua;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public Tipo getTipo() {
@@ -94,3 +59,5 @@ public class Imovel {
         this.utilizacao = utilizacao;
     }
 }
+
+
