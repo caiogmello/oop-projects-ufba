@@ -87,4 +87,5 @@ public class Endereco {
                 ", cidade='" + cidade + '\'' +
                 '}';
     }
+
 }
