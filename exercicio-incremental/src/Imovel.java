@@ -9,6 +9,7 @@ public class Imovel {
     private Endereco endereco;
     private Tipo tipo;
     private String utilizacao;
+    private Agenda agenda;
 
     public Imovel(String numeroIptu, String rua,
                   String numero, String cep,
@@ -20,6 +21,7 @@ public class Imovel {
                 ? Tipo.valueOf(tipo.toUpperCase())
                 : Tipo.INVALID;
         this.utilizacao = utilizacao;
+        this.agenda = new Agenda();
     }
 
     public Imovel(String numeroIptu, String rua,
@@ -82,19 +84,6 @@ public class Imovel {
                 ", tipo=" + tipo +
                 ", utilizacao='" + utilizacao + '\'' +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Imovel imovel = (Imovel) o;
-        return Objects.equals(numeroIptu, imovel.numeroIptu) && Objects.equals(endereco, imovel.endereco) && tipo == imovel.tipo && Objects.equals(utilizacao, imovel.utilizacao);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(numeroIptu, endereco, tipo, utilizacao);
     }
 }
 
