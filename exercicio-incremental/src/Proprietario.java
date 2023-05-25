@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Proprietario {
 
@@ -17,7 +18,7 @@ public class Proprietario {
         this.identidade = identidade;
         this.endereco = new Endereco(rua, numero, cep, estado, cidade);
     }
-
+    
     public void addImovel(Imovel imovel) {
         if(!possuiImovel(imovel)){
             imoveis.add(imovel);
@@ -88,5 +89,38 @@ public class Proprietario {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public static Proprietario cadastrarProprietario() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o nome do proprietário: ");
+        String nome = scanner.nextLine();
+        System.out.println("Digite o CPF do proprietário: ");
+        String cpf = scanner.nextLine();
+        System.out.println("Digite a identidade do proprietário: ");
+        String identidade = scanner.nextLine();
+        System.out.println("Digite o nome da rua: ");
+        String rua = scanner.nextLine();
+        System.out.println("Digite o número da casa: ");
+        String numero = scanner.nextLine();
+        System.out.println("Digite o CEP: ");
+        String cep = scanner.nextLine();
+        System.out.println("Digite o estado: ");
+        String estado = scanner.nextLine();
+        System.out.println("Digite a cidade: ");
+        String cidade = scanner.nextLine();
+        System.out.println("Proprietário cadastrado com sucesso!\n");
+        return new Proprietario(nome, cpf, identidade, rua, numero, cep, estado, cidade);
+    }
+
+    @Override
+    public String toString() {
+        return "Proprietario{" +
+                "nome='" + nome + '\'' +
+                ", cpf='" + cpf + '\'' +
+                ", identidade='" + identidade + '\'' +
+                ", endereco=" + endereco +
+                ", imoveis=" + imoveis +
+                '}';
     }
 }

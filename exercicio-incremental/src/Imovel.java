@@ -1,4 +1,6 @@
+import java.util.Calendar;
 import java.util.Objects;
+import java.util.Scanner;
 
 enum Tipo {
     CASA, APTO, INVALID
@@ -31,6 +33,14 @@ public class Imovel {
         this(numeroIptu, rua, numero,
                 cep, "BA", "Salvador",
                 tipo, utilizacao);
+    }
+
+    public boolean alugarImovel(Calendar data) {
+        return agenda.alugar(data);
+    }
+
+    public boolean bloquearImovel(Calendar data) {
+        return agenda.bloquear(data);
     }
 
     public boolean verificaTipo(String tipo) {
@@ -76,6 +86,27 @@ public class Imovel {
         this.utilizacao = utilizacao;
     }
 
+    public static Imovel cadastrarImovel() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o número do IPTU: ");
+        String numeroIptu = scanner.nextLine();
+        System.out.println("Digite o nome da rua: ");
+        String rua = scanner.nextLine();
+        System.out.println("Digite o número da casa: ");
+        String numero = scanner.nextLine();
+        System.out.println("Digite o CEP: ");
+        String cep = scanner.nextLine();
+        System.out.println("Digite o estado: ");
+        String estado = scanner.nextLine();
+        System.out.println("Digite a cidade: ");
+        String cidade = scanner.nextLine();
+        System.out.println("Digite o tipo do imóvel (CASA ou APTO): ");
+        String tipo = scanner.nextLine();
+        System.out.println("Digite a utilização do imóvel: ");
+        String utilizacao = scanner.nextLine();
+        System.out.println("Imóvel cadastrado com sucesso!\n");
+        return new Imovel(numeroIptu, rua, numero, cep, estado, cidade, tipo, utilizacao);
+    }
     @Override
     public String toString() {
         return "Imovel{" +
