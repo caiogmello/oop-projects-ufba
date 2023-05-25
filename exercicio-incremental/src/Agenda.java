@@ -4,7 +4,11 @@ import java.util.Calendar;
 public class Agenda {
     private ArrayList<Calendar> alugados = new ArrayList<>();
     private ArrayList<Calendar> bloqueados = new ArrayList<>();
+    private boolean agendaBloqueada = false;
 
+    public void bloquearAgenda() {
+        agendaBloqueada = true;
+    }
 
     public boolean isAlugado(Calendar data) {
         for(Calendar c : alugados) {
@@ -25,11 +29,11 @@ public class Agenda {
     }
 
     public boolean isDisponivel(Calendar data) {
-        return !isAlugado(data) && !isBloqueado(data);
+        return !isAlugado(data) && !isBloqueado(data) && !agendaBloqueada;
     }
 
     public boolean alugar(Calendar data) {
-        if(!isAlugado(data) && !isBloqueado(data)) {
+        if(!isAlugado(data) && !agendaBloqueada) {
             alugados.add(data);
             return true;
         }

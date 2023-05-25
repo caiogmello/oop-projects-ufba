@@ -18,7 +18,13 @@ public class Proprietario {
         this.identidade = identidade;
         this.endereco = new Endereco(rua, numero, cep, estado, cidade);
     }
-    
+
+    public void bloquearImoveis() {
+        for(Imovel imovel: imoveis) {
+            imovel.bloquearAgenda();
+        }
+    }
+
     public void addImovel(Imovel imovel) {
         if(!possuiImovel(imovel)){
             imoveis.add(imovel);

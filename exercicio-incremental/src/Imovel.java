@@ -35,6 +35,9 @@ public class Imovel {
                 tipo, utilizacao);
     }
 
+    public void bloquearAgenda() {
+        agenda.bloquearAgenda();
+    }
     public boolean alugarImovel(Calendar data) {
         return agenda.alugar(data);
     }
