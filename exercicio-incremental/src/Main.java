@@ -11,9 +11,13 @@ public class Main {
             System.out.println("2 - Cadastrar proprietário");
             System.out.println("3 - Bloquear imóveis de um proprietário");
             System.out.println("4 - Sair");
+            Condominio condominio = new Condominio("Rua 1", "123", "12345-678", "SP", "São Paulo");
+            Imovel imovel = new UnidadeCompartilhada("1290.09", "Rua 1",
+                    "123", "12345-678", "Casa", "Residencial", "asd", condominio);
+            
             int opcao = scanner.nextInt();
             if(opcao == 1) {
-                Imovel imovel = Imovel.cadastrarImovel();
+//                Imovel imovel = UnidadeCompartilhada.cadastrarImovel();
                 System.out.println("Deseja adicionar o imóvel a um proprietário? (S/N)");
                 String resposta = scanner.next();
                 if(resposta.equalsIgnoreCase("S")) {
