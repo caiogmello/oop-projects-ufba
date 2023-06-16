@@ -91,7 +91,6 @@ public abstract class Imovel {
         this.utilizacao = utilizacao;
     }
 
-    public abstract Imovel cadastrarImovel();
     @Override
     public String toString() {
         return "Imovel{" +
