@@ -172,7 +172,18 @@ public class Main {
 
     public static void calcularAluguel(Imovel imovel){
         Scanner scanner = new Scanner(System.in);
-        double aluguel;
+        double aluguel=imovel.getAluguel();
+
+
+        if(imovel instanceof UnidadeCompartilhada){
+            UnidadeCompartilhada unidadeCompartilhada = (UnidadeCompartilhada) imovel;
+            aluguel = unidadeCompartilhada.getNumItensLazer() == 0
+                    ? aluguel*0.9
+                    : aluguel* unidadeCompartilhada.getNumItensLazer();
+        }
+
+        double aluguelAlterado;
+
         System.out.println("""
                 Digite o número referente a sazonalidade do aluguel:
                 1 - Reveillon;
@@ -183,21 +194,16 @@ public class Main {
                 """);
         int opcao = scanner.nextInt();
         switch (opcao) {
-            case 1 -> aluguel = imovel.getAluguel()*1.2;
-            case 2 -> aluguel = imovel.getAluguel()*1.15;
-            case 3 -> aluguel = imovel.getAluguel()*1.1;
-            case 4 -> aluguel = imovel.getAluguel()*1.05;
-            default -> aluguel = imovel.getAluguel();
+            case 1 -> aluguelAlterado = aluguel*1.2;
+            case 2 -> aluguelAlterado = aluguel*1.15;
+            case 3 -> aluguelAlterado = aluguel*1.1;
+            case 4 -> aluguelAlterado = aluguel*1.05;
+            default -> aluguelAlterado = aluguel;
         }
 
-        if(imovel instanceof UnidadeCompartilhada){
-            UnidadeCompartilhada unidadeCompartilhada = (UnidadeCompartilhada) imovel;
-            aluguel = unidadeCompartilhada.getNumItensLazer() == 0
-                    ? aluguel*0.9
-                    : aluguel* unidadeCompartilhada.getNumItensLazer();
-        }
 
-        System.out.println("O valor do aluguel é: " + aluguel + "\n");
+        System.out.println("O valor de referência do aluguel é: " + aluguel + "\n");
+        System.out.println("O valor do aluguel com a sazonalidade é: " + aluguelAlterado + "\n");
     }
 }
 
