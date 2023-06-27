@@ -37,11 +37,19 @@ public abstract class Imovel {
 
     public abstract double getAluguel();
 
+    public Agenda getAgenda() {
+        return agenda;
+    }
+
     public void bloquearAgenda() {
         agenda.bloquearAgenda();
     }
     public boolean alugarImovel(Calendar data) {
         return agenda.alugar(data);
+    }
+
+    public boolean isAlugado(Calendar data) {
+        return agenda.isAlugado(data);
     }
 
     public boolean bloquearImovel(Calendar data) {

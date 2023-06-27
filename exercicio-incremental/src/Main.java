@@ -1,8 +1,10 @@
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Scanner;
 
-public class Main {
+public class Main{
     public static void main(String[] args) {
+        Simulacao simulacao = new Simulacao();
         ArrayList<Proprietario> proprietarios = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
         while (true){
@@ -11,7 +13,8 @@ public class Main {
             System.out.println("2 - Cadastrar proprietário");
             System.out.println("3 - Bloquear imóveis de um proprietário");
             System.out.println("4 - Checar valor do aluguel de um imóvel");
-            System.out.println("5 - Sair");
+            System.out.println("5 - Checar disponibilidade de um imóvel");
+            System.out.println("6 - Sair");
 
             int opcao = scanner.nextInt();
 
@@ -30,11 +33,18 @@ public class Main {
             } else if (opcao == 4) {
                 try {
                     Imovel imovel =  listaImovel(proprietarios.get(listaProprietarios(proprietarios)));
-                    calcularAluguel(imovel);
+                    simulacao.calcularPrecoAluguel(imovel);
                 } catch (IndexOutOfBoundsException e) {
                     System.out.println("Não há proprietário cadastrados com esse CPF.\n");
                 }
             } else if (opcao == 5) {
+                try {
+                    Imovel imovel =  listaImovel(proprietarios.get(listaProprietarios(proprietarios)));
+                    simulacao.checkDisponibilidade(imovel);
+                } catch (IndexOutOfBoundsException e) {
+                    System.out.println("Não há proprietário cadastrados com esse CPF.\n");
+                }
+            } else if (opcao == 6) {
                 System.out.println("Saindo...");
                 break;
             } else {
@@ -151,7 +161,7 @@ public class Main {
         String cpf = scanner.nextLine();
         for (int i = 0; i < proprietarios.size(); i++) {
             if (proprietarios.get(i).getCpf().equals(cpf)) {
-                System.out.println("Proprietário: " + proprietarios.get(i).getNome());
+                System.out.println("Proprietário: " + proprietarios.get(i).getNome() + "\n");
                 return i;
             }
         }
@@ -170,7 +180,7 @@ public class Main {
         return null;
     }
 
-    public static void calcularAluguel(Imovel imovel){
+    public static double calcularAluguel(Imovel imovel){
         Scanner scanner = new Scanner(System.in);
         double aluguel=imovel.getAluguel();
 
@@ -182,28 +192,33 @@ public class Main {
                     : aluguel* unidadeCompartilhada.getNumItensLazer();
         }
 
-        double aluguelAlterado;
-
-        System.out.println("""
-                Digite o número referente a sazonalidade do aluguel:
-                1 - Reveillon;
-                2 - Carnaval;
-                3 - Feriado Alta Estação;
-                4 - Feriado Baixa Estação;
-                0 - Comum
-                """);
-        int opcao = scanner.nextInt();
-        switch (opcao) {
-            case 1 -> aluguelAlterado = aluguel*1.2;
-            case 2 -> aluguelAlterado = aluguel*1.15;
-            case 3 -> aluguelAlterado = aluguel*1.1;
-            case 4 -> aluguelAlterado = aluguel*1.05;
-            default -> aluguelAlterado = aluguel;
-        }
-
+        double aluguelAlterado = checkSazonalidade(aluguel);
 
         System.out.println("O valor de referência do aluguel é: " + aluguel + "\n");
         System.out.println("O valor do aluguel com a sazonalidade é: " + aluguelAlterado + "\n");
+
+        return aluguelAlterado;
     }
+
+    public static double checkSazonalidade(double aluguel){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Digite o número referente a sazonalidade do aluguel:");
+        System.out.println("1 - Reveillon;");
+        System.out.println("2 - Carnaval;");
+        System.out.println("3 - Feriado Alta Estação;");
+        System.out.println("4 - Feriado Baixa Estação;");
+        System.out.println("0 - Comum");
+        int opcao = scanner.nextInt();
+        switch (opcao) {
+            case 1 -> aluguel = aluguel*1.2;
+            case 2 -> aluguel = aluguel*1.15;
+            case 3 -> aluguel = aluguel*1.1;
+            case 4 -> aluguel = aluguel*1.05;
+            default -> aluguel = aluguel*1;
+        }
+        return aluguel;
+    }
+
+
 }
 

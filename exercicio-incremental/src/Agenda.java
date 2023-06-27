@@ -66,4 +66,28 @@ public class Agenda {
         }
         return false;
     }
+
+    public ArrayList<Calendar> getAlugados() {
+        return alugados;
+    }
+
+    public void setAlugados(ArrayList<Calendar> alugados) {
+        this.alugados = alugados;
+    }
+
+    public ArrayList<Calendar> getBloqueados() {
+        return bloqueados;
+    }
+
+    public void setBloqueados(ArrayList<Calendar> bloqueados) {
+        this.bloqueados = bloqueados;
+    }
+
+    public boolean isAgendaBloqueada() {
+        return agendaBloqueada;
+    }
+
+    public void setAgendaBloqueada(boolean agendaBloqueada) {
+        this.agendaBloqueada = agendaBloqueada;
+    }
 }
