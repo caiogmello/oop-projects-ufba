@@ -1,9 +1,8 @@
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Scanner;
 
 public class Main{
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UsuarioExistenteException {
         Simulacao simulacao = new Simulacao();
         ArrayList<Proprietario> proprietarios = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
@@ -22,7 +21,16 @@ public class Main{
                 cadastrarImovel(proprietarios);
             } else if (opcao == 2) {
                 Proprietario proprietario = cadastrarProprietario();
-                proprietarios.add(proprietario);
+                if(estaCadastrado(proprietario.getCpf(), proprietarios)){
+                    try {
+                        throw new UsuarioExistenteException("ERRO: Proprietário com o CPF (" + proprietario.getCpf() + ") já cadastrado. Tente novamente.\n");
+                    } catch (UsuarioExistenteException e) {
+                        System.out.println(e.getMessage());
+                    }
+                } else{
+                    System.out.println("Proprietário cadastrado com sucesso.\n");
+                    proprietarios.add(proprietario);
+                }
             } else if (opcao == 3) {
                 try {
                     proprietarios.get(listaProprietarios(proprietarios)).bloquearImoveis();
@@ -151,8 +159,16 @@ public class Main{
         String estado = scanner.nextLine();
         System.out.println("Digite a cidade: ");
         String cidade = scanner.nextLine();
-        System.out.println("Proprietário cadastrado com sucesso!\n");
         return new Proprietario(nome, cpf, identidade, rua, numero, cep, estado, cidade);
+    }
+
+    public static boolean estaCadastrado(String cpf, ArrayList<Proprietario> proprietarios){
+        for (Proprietario proprietario : proprietarios) {
+            if(proprietario.getCpf().equals(cpf)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public static int listaProprietarios(ArrayList<Proprietario> proprietarios) {
